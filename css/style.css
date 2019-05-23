@@ -1,0 +1,25 @@
+img {
+    max-width: 600px;
+}
+
+iframe {
+    width: 320px;
+    height: 150px;
+}
+
+.audio {
+    display: block;
+    position: relative;
+    background-color: yellow;
+    padding: 20px;
+    margin: 20px;
+    z-index: 0;
+}
+
+.audio iframe {
+    z-index: 0;
+}
+
+.audio #shape {
+    z-index: 10;
+}
