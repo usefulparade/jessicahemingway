@@ -1,25 +1,145 @@
+@import url('https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i,900&display=swap');
+
+body {
+    font-family: 'Playfair Display', 'Courier New', monospace;
+    background-color: rgb(249, 188, 182);
+    margin: 0px;
+    padding-top: 300px;
+}
+
+h1 {
+    color: rgb(53, 115, 223);
+    font-size: 5em;
+    font-weight: 900;
+}
+
 img {
-    max-width: 600px;
+    max-width: 100%;
 }
 
-iframe {
-    width: 320px;
-    height: 150px;
+.container {
+    display: block;
+    margin: 0px;
+    padding: 0px;
+    width: 100vw;
+    
 }
 
-.audio {
+.mainColumn {
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    max-width: 720px;
+    padding-left: 30px;
+    padding-right: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgb(249, 188, 182);
+}
+
+.top {
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 20%;
+    text-align: center; 
+    transform: rotate(10deg);
+    z-index: 100;
+}
+
+.top h1 {
+    text-shadow: 10px 5px 2px rgb(34, 255, 251);
+}
+
+.archive {
+    
+}
+
+.videoBlock {
+   margin-bottom: 20px;
+   padding: 20%;
+   background-image: url('../img/videobg1.png');
+   background-size: cover;
+   background-position: center;
+   background-repeat: no-repeat;
+}
+
+.four-by-three {
     display: block;
     position: relative;
-    background-color: yellow;
-    padding: 20px;
-    margin: 20px;
-    z-index: 0;
+    box-sizing: content-box;
+    width: 100%;
+    height: 0;
+    padding-bottom: 66.66%;
 }
 
-.audio iframe {
-    z-index: 0;
+.videoBlock iframe {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0; left: 0;
+    border: none;
 }
 
-.audio #shape {
-    z-index: 10;
+.audioBlock {
+    display: block;
+    position: relative;
+    max-width: 90%;
+    padding-left: 10%;
+    padding-right: 10%;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.audioBlock iframe {
+    z-index: 0;
+    width: 100%;
+    height: 100px;
+    border-radius: 50px;
+    box-sizing: content-box;
+    opacity: 0.9;
+    border: 30px dashed rgb(255, 234, 74);
+    transform: rotate(-30deg);
+    /* animation-name: borderGrow;
+    animation-duration: 3s;
+    animation-direction: alternate;
+    animation-iteration-count: infinite; */
+}
+
+.imageBlock {
+    display: block;
+    position: relative;
+    width: 100%;
+    padding-top: 20%;
+    padding-left: 11%;
+    padding-right: 11%;
+    /* height: 400px; */
+    box-sizing: border-box;
+    background-image: url('../img/imagebg1.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.imageAspect {
+    position: relative;
+    height: 0;
+    overflow: hidden;
+    padding-top: 66.66%;
+}
+
+.imageBlock img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    height: 100%;
+    border-radius: 3px;
+}
+
+@keyframes borderGrow {
+    from {border-width: 10px;}
+    to {border-width: 30px;}
 }
