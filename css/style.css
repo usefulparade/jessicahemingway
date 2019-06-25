@@ -1,16 +1,36 @@
 @import url('https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i,900&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Acme&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Rubik+Mono+One&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Permanent+Marker&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Alfa+Slab+One&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Caveat:400,700&display=swap');
+
+:root{
+    --color-one: rgb(242, 216, 72);
+    --color-two: rgb(50, 0, 55);
+    --color-three: rgb(255, 162, 128);
+    --color-four: rgb(62, 162, 193);
+    --color-five: rgb(241, 90, 255);
+}
 
 body {
-    font-family: 'Playfair Display', 'Courier New', monospace;
-    background-color: rgb(249, 188, 182);
+    font-family: 'Acme', 'Courier New', monospace;
+    background-color: var(--color-one);
     margin: 0px;
-    padding-top: 300px;
+    /* padding-top: 300px; */
 }
 
 h1 {
-    color: rgb(53, 115, 223);
+    font-family: 'Caveat', cursive;
+    color: var(--color-two);
     font-size: 5em;
     font-weight: 900;
+}
+
+h2 {
+    font-size: 2em;
+    font-family: 'Caveat', cursive;
+    color: var(--color-two);
 }
 
 img {
@@ -25,35 +45,100 @@ img {
     
 }
 
-.mainColumn {
+.top {
+    position: relative;
+    display: block;
+    top: 0;
+    margin-left: auto;
+    margin-right: auto;
+    width: 75%;
+    text-align: center; 
+    /* transform: rotate(10deg); */
+    z-index: 100;
+}
+
+.nav {
+    margin-top: -20px;
     display: inline-block;
-    position: absolute;
+    background-color: var(--color-four);
+    border-radius: 30px 30px 0px 0px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.navblock {
+    display: inline-block;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.navblock h2 {
+    line-height: 0.5em;
+}
+
+.navblock h2:hover {
+    color: var(--color-one);
+    cursor: pointer;
+}
+
+.mainColumn {
+    display: block;
     left: 0;
     right: 0;
     max-width: 720px;
     padding-left: 30px;
     padding-right: 30px;
+    padding-top: 30px;
+    padding-bottom: 30px;
     margin-left: auto;
     margin-right: auto;
-    background-color: rgb(249, 188, 182);
-}
-
-.top {
-    position: absolute;
-    display: block;
-    top: 0;
-    left: 20%;
-    text-align: center; 
-    transform: rotate(10deg);
-    z-index: 100;
-}
-
-.top h1 {
-    text-shadow: 10px 5px 2px rgb(34, 255, 251);
+    margin-bottom: 0px;
+    background-color: var(--color-three);
+    border-radius: 50px;
+    border: 10px dotted var(--color-two);
 }
 
 .archive {
-    
+    display: block;
+}
+
+.about {
+    display: none;
+}
+
+.bottom-wrapper {
+    display: block;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 720px;
+}
+.bottom-tab {
+    display: block;
+    position: relative;
+    background-color: var(--color-four);
+    border-radius: 0px 0px 30px 30px;
+    padding-left: 20px;
+    padding-right: 20px;
+    max-width: 60%;
+    height: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    z-index: -10;
+}
+
+.shadow {
+    text-shadow: -5px 5px 4px var(--color-four);
+}
+
+.shadow-box {
+    box-shadow: -20px -10px 10px var(--color-four);
+}
+
+.a-body {
+    animation: a-body 1s ease-in-out infinite alternate;
+}
+.moves {
+    animation: moves 2s infinite alternate;
 }
 
 .videoBlock {
@@ -90,6 +175,7 @@ img {
     padding-right: 10%;
     position: relative;
     box-sizing: border-box;
+    animation: seesaw 10s infinite alternate;
 }
 
 .audioBlock iframe {
@@ -99,8 +185,9 @@ img {
     border-radius: 50px;
     box-sizing: content-box;
     opacity: 0.9;
-    border: 30px dashed rgb(255, 234, 74);
-    transform: rotate(-30deg);
+    border: 10px dashed rgb(255, 234, 74);
+    /* transform: rotate(-30deg); */
+    overflow: hidden;
     /* animation-name: borderGrow;
     animation-duration: 3s;
     animation-direction: alternate;
@@ -142,4 +229,27 @@ img {
 @keyframes borderGrow {
     from {border-width: 10px;}
     to {border-width: 30px;}
+}
+
+@keyframes a-body {
+    from {
+        margin-left: -20px;
+    }
+    to {
+        margin-left: 20px;
+    }
+}
+
+@keyframes seesaw {
+    from {transform: rotate(-20deg);}
+    to {transform: rotate(20deg);}
+}
+
+@media only screen and (max-width: 700px){
+    h1 {
+        font-size: 3em;
+    }
+    /* h2 {
+        font-size: 1.5em;
+    } */
 }
