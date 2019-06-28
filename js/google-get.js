@@ -122,7 +122,7 @@ function ArchiveBlock(type, date, title, content, caption){
             this.audio.parent(this.blockContent);
         } else if (this.type == 'image'){
             this.block = createDiv().addClass('archiveBlock imgBlock');
-            this.imgBlock = createImg('https://drive.google.com/uc?id=' + this.innerContentID[1]);
+            this.imgBlock = createImg('https://drive.google.com/uc?export=view&id=' + this.innerContentID[1]);
             this.imgBlock.parent(this.blockContent);
             this.link = createA(this.innerContent, this.caption, "_blank");
             this.link.parent(this.blockContent);
