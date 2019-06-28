@@ -54,6 +54,18 @@ h4 {
     margin: 0px;
 }
 
+/* CAPTIONS */
+
+h5 {
+
+}
+
+/* TEXT POSTS & ABOUT */
+
+p {
+
+}
+
 img {
     max-width: 100%;
 }
@@ -202,6 +214,18 @@ img {
     filter: sepia(60%);
 }
 
+.imgBlock .blockContent {
+    height: auto;
+}
+
+.imgBlock img {
+    display: block;
+    position: relative;
+    border-radius: 5px;
+    width: 400px;
+    
+}
+
 .blockDate .month, .day, .year {
     width: 40px;
     height: 40px;
@@ -240,6 +264,10 @@ img {
 
 .box-shadow {
     box-shadow: -20px -10px 0px var(--color-two);
+}
+
+.nav-shadow {
+    box-shadow: -20px -8px 0px var(--color-two);
 }
 
 .a-body {
