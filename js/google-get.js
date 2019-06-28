@@ -113,12 +113,12 @@ function ArchiveBlock(type, date, title, content, caption){
         if (this.type == 'video'){
             this.block = createDiv().addClass('archiveBlock videoBlock');
             // this.link = createA(this.innerContent, this.caption, "_blank");
-            this.vid = createDiv("<iframe src='https://drive.google.com/file/d/" + this.innerContentID[1] + "/preview' width='640' height='480'></iframe>");
+            this.vid = createDiv("<iframe src='https://drive.google.com/file/d/" + this.innerContentID[1] + "/preview'></iframe>");
             this.vid.parent(this.blockContent);
         } else if (this.type == 'audio'){
             this.block = createDiv().addClass('archiveBlock audioBlock');
             // this.link = createA(this.innerContent, this.caption, "_blank");
-            this.audio = createDiv("<iframe src='https://drive.google.com/file/d/" + this.innerContentID[1] + "/preview' width='640' height='480'></iframe>");
+            this.audio = createDiv("<iframe src='https://drive.google.com/file/d/" + this.innerContentID[1] + "/preview'></iframe>");
             this.audio.parent(this.blockContent);
         } else if (this.type == 'image'){
             this.block = createDiv().addClass('archiveBlock imgBlock');
