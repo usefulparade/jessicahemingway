@@ -1,5 +1,7 @@
 var spreadsheetURL = "https://docs.google.com/spreadsheets/d/1mJ3ccpWe6SR6FJNw1uRyAp_tcUEuRaDoxVwVyqIKiTI/edit?usp=sharing";
 
+var posts = [];
+
 function setup(){
     init();
 }
@@ -20,33 +22,43 @@ function init (){
 
 function populateContent(sheet){
     console.log(sheet);
+
+    var dates = [];
+    for (j=0;j<sheet.length;j++){
+        var d = new Date(sheet[j].DATE);
+        dates[j] = d;
+    }
+
+    
     
     var archive = document.getElementById("archive");
-    var audioBlock = document.getElementById("audio");
 
     for (i=0;i<sheet.length;i++){
-        var thisDate = createP(sheet[i].DATE);
-        var thisBlock;
-        var thisContent;
+        var r1 = random(-30, 30);
+        var r2 = random(-30, 30);
+        var r3 = random(-30, 30);
 
-        if (sheet[i].TYPE == 'video'){
-            thisBlock = createDiv().addClass('videoBlock-sm');
-            thisContent = createA(sheet[i].CONTENT, sheet[i].CAPTION, "_blank");
-        } else if (sheet[i].TYPE == 'audio'){
-            thisBlock = createDiv().addClass('audioBlock-sm');
-            thisContent = createA(sheet[i].CONTENT, sheet[i].CAPTION, "_blank");
-        } else if (sheet[i].TYPE == 'image'){
-            thisBlock = createDiv().addClass('imgBlock-sm');
-            thisContent = createA(sheet[i].CONTENT, sheet[i].CAPTION, "_blank");
-        } else if (sheet[i].TYPE == 'text'){
-            thisBlock = createDiv().addClass('textBlock-sm');
-            thisContent = createP(sheet[i].CONTENT);
-        } else {
+        var thisDate = createDiv().addClass('blockDate');
+        // var thisMonth = createElement("h4", ("0" + dates[i].getMonth()).slice(-2)).addClass('month');
+        // var thisDay = createElement("h4", ("0" + dates[i].getDate()).slice(-2)).addClass('day');
+        var thisMonth = createElement("h4", (dates[i].getMonth())).addClass('month');
+        var thisDay = createElement("h4", (dates[i].getDate())).addClass('day');
+        var thisYear = createElement("h4", ("" + dates[i].getFullYear()).slice(-2)).addClass('year');
 
-        }
-        thisDate.parent(thisBlock);
-        thisContent.parent(thisBlock);
-        thisBlock.parent(archive);
+        thisMonth.style('transform', 'rotate(' + r1 + 'deg)');
+        thisDay.style('transform', 'rotate(' + r2 + 'deg)');
+        thisYear.style('transform', 'rotate(' + r3 + 'deg)');
+        thisMonth.parent(thisDate);
+        thisDay.parent(thisDate);
+        thisYear.parent(thisDate);
+
+        var newBlock = new ArchiveBlock(sheet[i].TYPE, thisDate, sheet[i].TITLE, sheet[i].CONTENT, sheet[i].CAPTION);
+        posts.push(newBlock);
+    }
+
+    for (k=0;k<posts.length;k++){
+        posts[k].createBlock();
+        posts[k].postBlock();
     }
 
     // var imgTest = createImg("https://drive.google.com/uc?id=" + sheet[2].CONTENT);
@@ -79,5 +91,53 @@ function openArchive(){
 function openAbout(){
     document.getElementById("archive").style = "display: none;";
     document.getElementById("about").style = "display: block;";
+}
+
+function ArchiveBlock(type, date, title, content, caption){
+    this.type = type;
+    this.date = date;
+    this.title = title;
+    this.blockContent = createDiv().addClass('blockContent');
+    this.innerContent = content;
+    this.caption = caption;
+    this.innerContentID = this.innerContent.split('=');
+
+    this.createBlock = function(){
+
+        if (this.title != ""){
+            this.titleBlock = createElement('h3', this.title).addClass('titleBlock');
+        } else {
+            this.titleBlock = createDiv().style('display', 'none').addClass('titleBlock');
+        }
+
+        if (this.type == 'video'){
+            this.block = createDiv().addClass('archiveBlock videoBlock');
+            // this.link = createA(this.innerContent, this.caption, "_blank");
+            this.vid = createDiv("<iframe src='https://drive.google.com/file/d/" + this.innerContentID[1] + "/preview' width='640' height='480'></iframe>");
+            this.vid.parent(this.blockContent);
+        } else if (this.type == 'audio'){
+            this.block = createDiv().addClass('archiveBlock audioBlock');
+            // this.link = createA(this.innerContent, this.caption, "_blank");
+            this.audio = createDiv("<iframe src='https://drive.google.com/file/d/" + this.innerContentID[1] + "/preview' width='640' height='480'></iframe>");
+            this.audio.parent(this.blockContent);
+        } else if (this.type == 'image'){
+            this.block = createDiv().addClass('archiveBlock imgBlock');
+            this.link = createA(this.innerContent, this.caption, "_blank");
+            this.link.parent(this.blockContent);
+        } else if (this.type == 'text'){
+            this.block = createDiv().addClass('archiveBlock textBlock');
+            this.text = createP(this.innerContent);
+            this.text.parent(this.blockContent);
+        } else {
+
+        }
+    };
+
+    this.postBlock = function(){
+        this.titleBlock.parent(this.block);
+        this.date.parent(this.block);
+        this.blockContent.parent(this.block);
+        this.block.parent(archive);
+    };
 }
 
