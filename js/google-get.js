@@ -34,6 +34,8 @@ function populateContent(sheet){
     var archive = document.getElementById("archive");
 
     for (i=0;i<sheet.length;i++){
+
+        // three random numbers for date rotations
         var r1 = random(-30, 30);
         var r2 = random(-30, 30);
         var r3 = random(-30, 30);
@@ -41,13 +43,18 @@ function populateContent(sheet){
         var thisDate = createDiv().addClass('blockDate');
         // var thisMonth = createElement("h4", ("0" + dates[i].getMonth()).slice(-2)).addClass('month');
         // var thisDay = createElement("h4", ("0" + dates[i].getDate()).slice(-2)).addClass('day');
-        var thisMonth = createElement("h4", (dates[i].getMonth())).addClass('month');
+        var thisMonth = createElement("h4", (dates[i].getMonth()) + 1).addClass('month');
         var thisDay = createElement("h4", (dates[i].getDate())).addClass('day');
         var thisYear = createElement("h4", ("" + dates[i].getFullYear()).slice(-2)).addClass('year');
 
+        // GIVE DATES RANDOM ROTATIONS AND ANIMATION DELAYS
         thisMonth.style('transform', 'rotate(' + r1 + 'deg)');
+        thisMonth.style('animation-delay', random(0,3) + 's');
         thisDay.style('transform', 'rotate(' + r2 + 'deg)');
+        thisDay.style('animation-delay', random(0,3) + 's');
         thisYear.style('transform', 'rotate(' + r3 + 'deg)');
+        thisYear.style('animation-delay', random(0,3) + 's');
+
         thisMonth.parent(thisDate);
         thisDay.parent(thisDate);
         thisYear.parent(thisDate);
@@ -84,13 +91,17 @@ function populateContent(sheet){
 }
 
 function openArchive(){
+    //SHOW ARCHIVE, HIDE GARDEN, CHANGE COLOR
     document.getElementById("archive").style = "display: block;";
-    document.getElementById("about").style = "display: none;";
+    document.getElementById("garden").style = "display: none;";
+    document.getElementById("column").style = "background-color: var(--color-three);";
 }
 
-function openAbout(){
+function openGarden(){
+    //HIDE ARCHIVE, SHOW GARDEN, CHANGE COLOR
     document.getElementById("archive").style = "display: none;";
-    document.getElementById("about").style = "display: block;";
+    document.getElementById("garden").style = "display: block;";
+    document.getElementById("column").style = "background-color: var(--color-six);";
 }
 
 function ArchiveBlock(type, date, title, content, caption){
@@ -98,6 +109,7 @@ function ArchiveBlock(type, date, title, content, caption){
     this.date = date;
     this.title = title;
     this.blockContent = createDiv().addClass('blockContent');
+    this.blockCaption = createDiv().addClass('blockCaption');
     this.innerContent = content;
     this.caption = caption;
     this.innerContentID = this.innerContent.split('=');
@@ -106,6 +118,8 @@ function ArchiveBlock(type, date, title, content, caption){
 
         if (this.title != ""){
             this.titleBlock = createElement('h3', this.title).addClass('titleBlock');
+            this.titleBlock.style('animation-delay', random(0,3) + 's');
+            this.titleBlock.style('animation-duration', random(2,5) + 's');
         } else {
             this.titleBlock = createDiv().style('display', 'none').addClass('titleBlock');
         }
@@ -115,17 +129,38 @@ function ArchiveBlock(type, date, title, content, caption){
             // this.link = createA(this.innerContent, this.caption, "_blank");
             this.vid = createDiv("<iframe src='https://drive.google.com/file/d/" + this.innerContentID[1] + "/preview'></iframe>");
             this.vid.parent(this.blockContent);
+
+            // ADD CAPTION
+            this.captionContent = createElement('h5', this.caption);
+            this.captionContent.parent(this.blockCaption);
+            
         } else if (this.type == 'audio'){
+            //random number for audio block rotation
+            var r4 = random(70, 88);
+
             this.block = createDiv().addClass('archiveBlock audioBlock');
             // this.link = createA(this.innerContent, this.caption, "_blank");
             this.audio = createDiv("<iframe src='https://drive.google.com/file/d/" + this.innerContentID[1] + "/preview'></iframe>");
-            this.audio.parent(this.blockContent);
+            this.audioWrapper = createDiv().addClass('audioWrapper');
+
+            this.audioWrapper.style('transform', 'rotate(' + r4 + 'deg)');
+            this.audioWrapper.parent(this.blockContent);
+            this.audio.parent(this.audioWrapper);
+
+            // ADD CAPTION
+            this.captionContent = createElement('h5', this.caption);
+            this.captionContent.parent(this.blockCaption);
+
         } else if (this.type == 'image'){
             this.block = createDiv().addClass('archiveBlock imgBlock');
             this.imgBlock = createImg('https://drive.google.com/uc?export=view&id=' + this.innerContentID[1]);
             this.imgBlock.parent(this.blockContent);
-            this.link = createA(this.innerContent, this.caption, "_blank");
-            this.link.parent(this.blockContent);
+            // this.link = createA(this.innerContent, this.caption, "_blank");
+            // this.link.parent(this.blockContent);
+
+            // ADD CAPTION
+            this.captionContent = createElement('h5', this.caption);
+            this.captionContent.parent(this.blockCaption);
         } else if (this.type == 'text'){
             this.block = createDiv().addClass('archiveBlock textBlock');
             this.text = createP(this.innerContent);
@@ -139,6 +174,7 @@ function ArchiveBlock(type, date, title, content, caption){
         this.titleBlock.parent(this.block);
         this.date.parent(this.block);
         this.blockContent.parent(this.block);
+        this.blockCaption.parent(this.block);
         this.block.parent(archive);
     };
 }
