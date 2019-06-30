@@ -170,7 +170,7 @@ img {
     height: 120vh;
     /* height: 200vh; */
     background-image: url('../img/titlebg.png');
-    background-size: 100%;
+    background-size: auto 105%;
     background-repeat: no-repeat;
     background-position-x: center;
     z-index: -500;
