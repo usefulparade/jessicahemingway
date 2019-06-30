@@ -580,10 +580,15 @@ img {
         z-index: -1;
     }
 
+    .textBlock .blockContent {
+        width: 190px;
+        font-size: 0.75em;
+        margin-left: 20px;
+        margin-top: -20px;
+    }
+
     .textBlock .blockDate::after {
         content: '';
-        display: inline-block;
-        position: absolute;
         background-size: 375px;
         width: 375px;
         height: 350px;
@@ -608,14 +613,6 @@ img {
     .audioBlock .blockContent iframe {
         width: 400px;
         height: 100px;
-    }
-
-    .textBlock .blockContent {
-        position: relative;
-        width: 190px;
-        font-size: 0.75em;
-        margin-left: 20px;
-        margin-top: -20px;
     }
 
     .bottom-tab {
