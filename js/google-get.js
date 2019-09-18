@@ -11,13 +11,17 @@ function setup(){
 function init (){
     Tabletop.init( { key: spreadsheetURL,
                    callback: function(data, tabletop) { 
-                    // when we get the data, call our function to fill the site :)
+                    // when we get the data, call our function 
+                    // to fill the site :)
                     populateContent(data);
                    },
                    simpleSheet: true } );
 
 }
 
+// this function grabs the data that we pulled from google, 
+// creates useable date objects, sorts the array chronologically,
+// and then creates & posts the archive blocks.
 
 function populateContent(sheet){
     console.log(sheet);
@@ -30,12 +34,14 @@ function populateContent(sheet){
         }
     }
 
+    
     sheet.sort(function(a, b){
         var c = new Date(a.DATE);
         var d = new Date(b.DATE);
         return c-d;
     });
 
+    // this sorts the array from the most recent post down to the oldest
     sheet.reverse();
 
     var dates = [];
@@ -48,8 +54,6 @@ function populateContent(sheet){
         }
         dates[j] = d;
     }
-
-    
     
     var archive = document.getElementById("archive");
 
@@ -60,7 +64,7 @@ function populateContent(sheet){
         var r2 = random(-30, 30);
         var r3 = random(-30, 30);
 
-        var thisDate = createDiv().addClass('blockDate');
+        var thisDate = createDiv().addClass('bg' + round(random(1,3))).addClass('blockDate');
         var thisMonth = createElement("h4", months[(dates[i].getMonth())]).addClass('month');
         var thisDay = createElement("h4", (dates[i].getDate())).addClass('day');
         var thisYear = createElement("h4", ("" + dates[i].getFullYear()).slice(-2)).addClass('year');
@@ -142,6 +146,7 @@ function ArchiveBlock(type, date, title, content, text, embed, caption, link){
             this.titleBlock = createDiv().style('display', 'none').addClass('titleBlock');
         }
 
+
         //MAKE CONTENT BLOCKS!
 
         if (this.type == 'video'){
@@ -192,6 +197,7 @@ function ArchiveBlock(type, date, title, content, text, embed, caption, link){
 
         } else if (this.type == 'image'){
             this.block = createDiv().addClass('archiveBlock imgBlock');
+            
             this.imgBlock = createImg('https://drive.google.com/uc?export=view&id=' + this.innerMediaID[1]);
             this.imgBlock.parent(this.blockContent);
 

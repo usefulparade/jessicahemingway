@@ -306,11 +306,22 @@ img {
     z-index: -1;
 }
 
+.videoBlock .bg1.blockDate::after {
+    background-image: url('../img/vid1.png');
+}
+.videoBlock .bg2.blockDate::after {
+    background-image: url('../img/vid2.png');
+}
+.videoBlock .bg3.blockDate::after {
+    background-image: url('../img/vid3.png');
+}
+
+
 .imgBlock .blockDate::after {
     content: '';
     display: block;
     position: absolute;
-    background-image: url('../img/imagebg2.png');
+    
     background-size: 720px;
     background-repeat: no-repeat;
     width:720px;
@@ -320,11 +331,21 @@ img {
     z-index: -1;
 }
 
+.imgBlock .bg1.blockDate::after {
+    background-image: url('../img/img1.png');
+}
+.imgBlock .bg2.blockDate::after {
+    background-image: url('../img/img2.png');
+}
+.imgBlock .bg3.blockDate::after {
+    background-image: url('../img/img3.png');
+}
+
 .textBlock .blockDate::after {
     content: '';
     display: block;
     position: absolute;
-    background-image: url('../img/textbg2.png');
+    /* background-image: url('../img/textbg2.png'); */
     background-size: 600px;
     background-repeat: no-repeat;
     width:720px;
@@ -334,11 +355,21 @@ img {
     z-index: -1;
 }
 
+.textBlock .bg1.blockDate::after {
+    background-image: url('../img/text1.png');
+}
+.textBlock .bg2.blockDate::after {
+    background-image: url('../img/text2.png');
+}
+.textBlock .bg3.blockDate::after {
+    background-image: url('../img/text3.png');
+}
+
 .audioBlock .blockDate::after {
     content: '';
     display: block;
     position: absolute;
-    background-image: url('../img/audiobg1.png');
+    /* background-image: url('../img/audiobg1.png'); */
     background-size: 600px;
     background-repeat: no-repeat;
     width:720px;
@@ -346,6 +377,15 @@ img {
     margin-left: -60px;
     margin-top: -200px;
     z-index: -1;
+}
+.audioBlock .bg1.blockDate::after {
+    background-image: url('../img/audio1.png');
+}
+.audioBlock .bg2.blockDate::after {
+    background-image: url('../img/audio2.png');
+}
+.audioBlock .bg3.blockDate::after {
+    background-image: url('../img/audio3.png');
 }
 
 .videoBlock .blockContent {
