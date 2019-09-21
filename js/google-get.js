@@ -1,8 +1,20 @@
 var spreadsheetURL = "https://docs.google.com/spreadsheets/d/1mJ3ccpWe6SR6FJNw1uRyAp_tcUEuRaDoxVwVyqIKiTI/edit?usp=sharing";
 
+var fullSheet = [];
+
 var posts = [];
 
+var dates = [];
+
 var months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
+
+var currentPost = 0;
+
+var numPostsToLoad = 3;
+
+var targetPost = currentPost + numPostsToLoad;
+
+var totalPosts = 0;
 
 function setup(){
     init();
@@ -24,7 +36,8 @@ function init (){
 // and then creates & posts the archive blocks.
 
 function populateContent(sheet){
-    console.log(sheet);
+
+    fullSheet = sheet;
 
     for (l=0;l<sheet.length;l++){
         if (sheet[l].DATE != ""){
@@ -44,7 +57,6 @@ function populateContent(sheet){
     // this sorts the array from the most recent post down to the oldest
     sheet.reverse();
 
-    var dates = [];
     for (j=0;j<sheet.length;j++){
         var d;
         if (sheet[j].DATE != ""){
@@ -54,20 +66,76 @@ function populateContent(sheet){
         }
         dates[j] = d;
     }
+
+    totalPosts = sheet.length;
     
     var archive = document.getElementById("archive");
 
-    for (i=0;i<sheet.length;i++){
 
+    for (k=0;k<posts.length;k++){
+        posts[k].createBlock();
+        // posts[k].postBlock();
+    }
+
+    loadMorePosts();
+}
+
+function loadMorePosts(){
+    if (currentPost + numPostsToLoad < totalPosts){
+        targetPost = currentPost + numPostsToLoad;
+    } else {
+        targetPost = totalPosts;
+        document.getElementById("buttons").style = "display: none;";
+    }
+    
+    for (i=currentPost;i<targetPost;i++){
+        initializeNewArchiveBlock(i);
+        posts[i].createBlock();
+        posts[i].postBlock();
+    }
+    currentPost = targetPost;
+    
+}
+
+function loadAllPosts(){
+    for (i=currentPost;i<totalPosts;i++){
+        initializeNewArchiveBlock(i);
+        posts[i].createBlock();
+        posts[i].postBlock();
+    }
+    currentPost = totalPosts;
+    document.getElementById("buttons").style = "display: none;";
+}
+
+function openArchive(){
+    //SHOW ARCHIVE, HIDE GARDEN, CHANGE COLOR
+    
+    document.getElementById("archive").style = "display: block;";
+    if (currentPost < totalPosts){
+        document.getElementById("buttons").style = "display: block;";
+    }
+    document.getElementById("garden").style = "display: none;";
+    document.getElementById("column").style = "background-color: var(--color-three);";
+}
+
+function openGarden(){
+    //HIDE ARCHIVE, SHOW GARDEN, CHANGE COLOR
+    document.getElementById("archive").style = "display: none;";
+    document.getElementById("buttons").style = "display: none;";
+    document.getElementById("garden").style = "display: block;";
+    document.getElementById("column").style = "background-color: var(--color-six);";
+}
+
+function initializeNewArchiveBlock(currentIndex) {
         // three random numbers for date rotations
         var r1 = random(-30, 30);
         var r2 = random(-30, 30);
         var r3 = random(-30, 30);
 
-        var thisDate = createDiv().addClass('bg' + round(random(1,3))).addClass('blockDate');
-        var thisMonth = createElement("h4", months[(dates[i].getMonth())]).addClass('month');
-        var thisDay = createElement("h4", (dates[i].getDate())).addClass('day');
-        var thisYear = createElement("h4", ("" + dates[i].getFullYear()).slice(-2)).addClass('year');
+        var thisDate = createDiv().addClass('bg' + int(random(1,4))).addClass('blockDate');
+        var thisMonth = createElement("h4", months[(dates[currentIndex].getMonth())]).addClass('month');
+        var thisDay = createElement("h4", (dates[currentIndex].getDate())).addClass('day');
+        var thisYear = createElement("h4", ("" + dates[currentIndex].getFullYear()).slice(-2)).addClass('year');
 
         // GIVE DATES RANDOM ROTATIONS AND ANIMATION DELAYS
         thisMonth.style('transform', 'rotate(' + r1 + 'deg)');
@@ -81,28 +149,8 @@ function populateContent(sheet){
         thisDay.parent(thisDate);
         thisYear.parent(thisDate);
 
-        var newBlock = new ArchiveBlock(sheet[i].TYPE, thisDate, sheet[i].TITLE, sheet[i].MEDIA, sheet[i].TEXT, sheet[i].EMBED, sheet[i].CAPTION, sheet[i].LINK);
+        var newBlock = new ArchiveBlock(fullSheet[currentIndex].TYPE, thisDate, fullSheet[currentIndex].TITLE, fullSheet[currentIndex].MEDIA, fullSheet[currentIndex].TEXT, fullSheet[currentIndex].EMBED, fullSheet[currentIndex].CAPTION, fullSheet[currentIndex].LINK);
         posts.push(newBlock);
-    }
-
-    for (k=0;k<posts.length;k++){
-        posts[k].createBlock();
-        posts[k].postBlock();
-    }
-}
-
-function openArchive(){
-    //SHOW ARCHIVE, HIDE GARDEN, CHANGE COLOR
-    document.getElementById("archive").style = "display: block;";
-    document.getElementById("garden").style = "display: none;";
-    document.getElementById("column").style = "background-color: var(--color-three);";
-}
-
-function openGarden(){
-    //HIDE ARCHIVE, SHOW GARDEN, CHANGE COLOR
-    document.getElementById("archive").style = "display: none;";
-    document.getElementById("garden").style = "display: block;";
-    document.getElementById("column").style = "background-color: var(--color-six);";
 }
 
 function ArchiveBlock(type, date, title, content, text, embed, caption, link){
@@ -173,7 +221,6 @@ function ArchiveBlock(type, date, title, content, text, embed, caption, link){
             var r4 = random(70, 88);
 
             this.block = createDiv().addClass('archiveBlock audioBlock');
-            // this.link = createA(this.innerMedia, this.caption, "_blank");
             this.audio = createDiv("<iframe src='https://drive.google.com/file/d/" + this.innerMediaID[1] + "/preview'></iframe>");
             this.audioWrapper = createDiv().addClass('audioWrapper');
 

@@ -1,22 +1,18 @@
-/* @import url('https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i,900&display=swap'); */
+
 @import url('https://fonts.googleapis.com/css?family=Acme&display=swap');
-/* @import url('https://fonts.googleapis.com/css?family=Rubik+Mono+One&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Permanent+Marker&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Alfa+Slab+One&display=swap'); */
 @import url('https://fonts.googleapis.com/css?family=Caveat:400,700&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Domine&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Archivo+Black&display=swap');
 @import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans:100,100i,300,300i,700,700i&display=swap');
 
 
 :root{
-    --color-one: rgb(255, 230, 91);
-    --color-two: rgb(50, 0, 55);
-    --color-three: rgb(201, 127, 114);
+    --color-one: #ffe65b;
+    --color-two: #320037;
+    --color-three: #c97f72;
     --color-four: #328598;
-    --color-five: rgb(150, 0, 167);
-    --color-six: rgb(60, 108, 93);
-    --color-seven: rgb(249, 244, 241);
+    --color-five: #9600a7;
+    --color-six: #3c6c5d;
+    --color-seven: #f9f4f1;
     --caption-color: #53dfff7b;
 
     --font-one: 'Acme', 'Courier New', monospace;
@@ -62,24 +58,29 @@ h1 small {
 h2 {
     font-size: 2em;
     font-family: var(--font-four);
-    color: var(--color-five);
+    color: var(--color-one);
     font-weight: 100;
     font-style: italic;
 }
-
 /* POST TITLES */
 
 h3 {
     font-family: var(--font-four);
     color: var(--color-seven);
+    text-shadow: 5px 5px 2px var(--color-two);
     font-size: 2em;
 }
 
 /* POST DATES */
 
 h4 {
-    font-size: 3em;
-    font-family: var(--font-two);
+    font-size: 2em;
+    line-height: 2.4em;
+    font-family: var(--font-one);
+    color: var(--color-seven);
+    text-shadow: 3px 3px 0px var(--color-two);
+    font-weight: 100;
+    font-style: italic;
     margin: 0px;
 }
 
@@ -98,7 +99,7 @@ h5 {
 h2#footer {
     font-size: 1.8em;
     font-family: var(--font-four);
-    color: var(--color-five);
+    /* color: var(--color-five); */
     font-weight: 100;
     font-style: italic;
 }
@@ -117,21 +118,51 @@ p {
 a:link {
     color: var(--color-one);
 }
+a:visited {
+    color: var(--color-one);
+}
 
 a:hover {
-    color: var(--color-five);
+    color: var(--color-four);
 }
 
 a:active {
     color: var(--color-seven);
 }
 
-a:visited {
-    color: var(--color-one);
-}
+
+
 
 img {
     max-width: 100%;
+}
+
+button {
+    display: block;
+    float: right;
+    font: var(--font-one);
+    font-style: italic;
+    background: var(--color-two);
+    color: var(--color-one);
+    border: solid var(--color-six) 4px;
+    border-radius: 10px;
+    box-shadow: var(--color-two) 5px 5px 2px;
+    padding: 10px;
+    margin: 10px;
+}
+
+button:hover {
+    background: var(--color-two);
+    color: var(--color-one);
+    border: solid var(--color-four) 4px;
+    box-shadow: var(--color-two) 7px 7px 1px;
+}
+
+button:active {
+    background: var(--color-four);
+    color: var(--color-one);
+    border: solid var(--color-four) 4px;
+    box-shadow: var(--color-two) 1px 1px 1px;
 }
 
 .container {
@@ -248,6 +279,14 @@ img {
     z-index: 100;
 }
 
+.buttons {
+    display: inline-block;
+    left: 0;
+    right: 0;
+    width: 100%;
+    
+}
+
 .archive {
     display: block;
     position: relative;
@@ -279,6 +318,7 @@ img {
     width: 40px;
     height: 120px;
     vertical-align: top;
+    color: white
 }
 
 .blockContent {
@@ -434,6 +474,7 @@ img {
 .imgBlock img {
     display: block;
     position: relative;
+    border: dashed 4px;
     border-radius: 5px;
     margin-left: 10px;
     width: 400px;
@@ -547,7 +588,8 @@ img {
     }
 
     h4 {
-        font-size: 2em;
+        font-size: 1.5em;
+        line-spacing: 2em;
     }
 
     .foundation {
